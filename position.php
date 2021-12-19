@@ -76,6 +76,59 @@
 
         </table>
     </div>
+
+    <h2>Required Skills</h2>
+
+    <div class="table-responsive">
+        <!-- Table - Reference: https://getbootstrap.com/docs/4.0/content/tables/ -->
+        <table id="position-skills-table" class="table table-striped">
+            <tr>
+                <th scope="col">Skills</th>
+            </tr>
+
+            <?php
+                // Define a class for creating the tables
+                require_once "TableRows.php";
+
+                // Read in the specifications for connecting to the database
+                require_once "dbconfig.php";
+
+                // Connect to the database
+                try {
+                    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                    // Get basic position data
+                    try {
+                        $stmt = $conn->prepare("SELECT skill FROM position_skills WHERE idposition= $position_id");
+                        $stmt->execute();
+
+                        // set the resulting array to associative
+                        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                            
+                        foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
+                            echo $v;
+                        }
+
+                    }
+
+                    catch(PDOException) {
+                        echo "<p class=\"error-message\">Error: Data unavailable. Failed to extract data pertaining to required skills. Please try again later</p>";
+                    }
+
+                } 
+                
+                // Exception handling for when we can't connect to the database or if the query fails
+                catch(PDOException) {
+                    echo "<p class=\"error-message\">Error: Data unavailable. Failed to connect to database. Please try again later</p>";
+                }
+                
+                // Remove connection to the database when we have all the required data.
+                $conn = null;
+            ?>
+
+        </table>
+    </div>
     
     
     <!-- Footer - Reference: https://mdbootstrap.com/docs/standard/navigation/footer/ -->
