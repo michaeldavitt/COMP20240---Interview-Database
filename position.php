@@ -1,6 +1,6 @@
 <?php
     // Initialise variables
-    $candidate_id = $_GET["submit"];
+    $position_id = $_GET["submit"];
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
         rel="stylesheet"
         href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <title>Salescorp Candidate</title>
+    <title>Salescorp Position</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
     <!-- Navbar - Reference: https://github.com/academind/bootstrap4-introduction/blob/03-navbar/index.html -->
@@ -24,16 +24,14 @@
         require_once "Navbar.php";
     ?>
 
-    <h1>Candidate: <?php echo $candidate_id;?></h1>
+    <h1>Position: <?php echo $position_id;?></h1>
 
     <div class="table-responsive">
         <!-- Table - Reference: https://getbootstrap.com/docs/4.0/content/tables/ -->
-        <table id="candidate-table" class="table table-striped">
+        <table id="position-table" class="table table-striped">
             <tr>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Phone Number</th>
-                <th scope="col">Address</th>
+                <th scope="col">Department ID</th>
+                <th scope="col">Position Type</th>
             </tr>
 
             <?php
@@ -49,7 +47,7 @@
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                     try {
-                        $stmt = $conn->prepare("SELECT firstname, surname, phone, address FROM candidate WHERE idcandidate = $candidate_id");
+                        $stmt = $conn->prepare("SELECT iddepartment, type FROM position WHERE idposition = $position_id");
                         $stmt->execute();
 
                         // set the resulting array to associative
@@ -62,7 +60,7 @@
                     }
 
                     catch(PDOException) {
-                        echo "<p class=\"error-message\">Error: Data unavailable. Failed to extract data pertaining to candidates. Please try again later</p>";
+                        echo "<p class=\"error-message\">Error: Data unavailable. Failed to extract data pertaining to positions. Please try again later</p>";
                     }
 
                 } 
@@ -87,6 +85,7 @@
 
     <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+    <script src="main.js"></script>
+    <script>convert_to_buttons("position-table", [0], ["department.php"])</script>
 </body>
 </html>

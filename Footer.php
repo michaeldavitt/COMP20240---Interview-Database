@@ -8,7 +8,7 @@ echo "
         </div>
     <!-- Copyright -->
     <!-- Grid container -->
-    <div class=\"text-center p-2\" style=\"background-color: rgba(0, 0, 0, 0.2);>
+    <div class=\"text-center p-3\" style=\"background-color: rgba(0, 0, 0, 0.2);>
         <!-- Section: Social media -->
         <section class=\"mb-4\">
             <!-- Linkedin -->
