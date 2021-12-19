@@ -15,7 +15,7 @@ function convert_to_buttons(table_name, column_indices, new_page_names) {
 
             // replace the first data item with a button that calls a function to display certain rows in the product table
             var data_name = tab_data[column_indices[j]].innerHTML
-            tab_data[column_indices[j]].innerHTML = "<td><form method=\"get\" action=\'" + new_page_names[j] + "\'><input type=\"submit\" name=\"submit\" value=\"" + data_name + "\"></form></td>";
+            tab_data[column_indices[j]].innerHTML = "<td><form method=\"get\" action=\'" + new_page_names[j] + "\'><input type=\"submit\" name=\"submit\" value=\"" + data_name + "\" class=\"btn btn-link\"></form></td>";
 
         }
     }
