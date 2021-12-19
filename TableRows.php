@@ -6,7 +6,7 @@
         }
 
         function current() {
-            return "<td>" . parent::current(). "</td>";
+            return "<td class=\"align-middle\">" . parent::current(). "</td>";
         }
 
         function beginChildren() {

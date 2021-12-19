@@ -7,3 +7,7 @@
 html {
     text-align: center;
 }
+
+h1 {
+    padding: 20px;
+}
