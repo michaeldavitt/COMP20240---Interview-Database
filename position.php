@@ -32,6 +32,8 @@
             <tr>
                 <th scope="col">Department ID</th>
                 <th scope="col">Position Type</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Description</th>
             </tr>
 
             <?php
@@ -47,7 +49,7 @@
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                     try {
-                        $stmt = $conn->prepare("SELECT iddepartment, type FROM position WHERE idposition = $position_id");
+                        $stmt = $conn->prepare("SELECT iddepartment, type, salary, description FROM position WHERE idposition = $position_id");
                         $stmt->execute();
 
                         // set the resulting array to associative
