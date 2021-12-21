@@ -43,6 +43,7 @@
         rel="stylesheet"
         href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
     <title>Salescorp Interviews</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -75,7 +76,7 @@
         <button type="submit" class="btn btn-secondary my-2" name="submit" value="Get Interviews">Get Interviews</button>
     </form>
 
-    <div class="table-responsive">
+    <div class="table-responsive m-2">
         <!-- Table - Reference: https://getbootstrap.com/docs/4.0/content/tables/ -->
         <table id="interview-table" class="table table-striped table-sortable">
             <thead>
@@ -143,5 +144,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="main.js"></script>
     <script>convert_to_buttons("interview-table", [1,2,3], ["candidate.php", "department.php", "position.php"])</script>
+    <script src="jquery-3.6.0.js"></script>
+    <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#interview-table').DataTable( {
+                searching: false,
+                ordering: false,
+                responsive: true,
+                "pageLength": 10
+            } );
+        } );
+    </script>
 </body>
 </html>
