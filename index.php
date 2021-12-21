@@ -21,58 +21,63 @@
 
     <h1>Interviews</h1>
 
+
+
     <div class="table-responsive">
         <!-- Table - Reference: https://getbootstrap.com/docs/4.0/content/tables/ -->
-        <table id="interview-table" class="table table-striped">
-            <tr>
-                <th scope="col">Interview ID</th>
-                <th scope="col">Candidate ID</th>
-                <th scope="col">Department ID</th>
-                <th scope="col">Position ID</th>
-                <th scope="col">Date</th>
-                <th scope="col">Result</th>
-            </tr>
+        <table id="interview-table" class="table table-striped table-sortable">
+            <thead>
+                <tr>
+                    <th scope="col" style="cursor: pointer;">Interview ID</th>
+                    <th scope="col" style="cursor: pointer;">Candidate ID</th>
+                    <th scope="col" style="cursor: pointer;">Department ID</th>
+                    <th scope="col" style="cursor: pointer;">Position ID</th>
+                    <th scope="col" style="cursor: pointer;">Date</th>
+                    <th scope="col" style="cursor: pointer;">Result</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <?php
+                    // Define a class for creating the tables
+                    require_once "TableRows.php";
 
-            <?php
-                // Define a class for creating the tables
-                require_once "TableRows.php";
+                    // Read in the specifications for connecting to the database
+                    require_once "dbconfig.php";
 
-                // Read in the specifications for connecting to the database
-                require_once "dbconfig.php";
-
-                // Connect to the database
-                try {
-                    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+                    // Connect to the database
                     try {
-                        $stmt = $conn->prepare("SELECT * FROM interview");
-                        $stmt->execute();
+                        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                        // set the resulting array to associative
-                        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                            
-                        foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
-                            echo $v;
+                        try {
+                            $stmt = $conn->prepare("SELECT * FROM interview");
+                            $stmt->execute();
+
+                            // set the resulting array to associative
+                            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                                
+                            foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
+                                echo $v;
+                            }
+
                         }
 
-                    }
+                        catch(PDOException) {
+                            echo "<p class=\"error-message\">Error: Data unavailable. Failed to extract data pertaining to interviews. Please try again later</p>";
+                        }
 
+                    } 
+                    
+                    // Exception handling for when we can't connect to the database or if the query fails
                     catch(PDOException) {
-                        echo "<p class=\"error-message\">Error: Data unavailable. Failed to extract data pertaining to interviews. Please try again later</p>";
+                        echo "<p class=\"error-message\">Error: Data unavailable. Failed to connect to database. Please try again later</p>";
                     }
-
-                } 
-                
-                // Exception handling for when we can't connect to the database or if the query fails
-                catch(PDOException) {
-                    echo "<p class=\"error-message\">Error: Data unavailable. Failed to connect to database. Please try again later</p>";
-                }
-                
-                // Remove connection to the database when we have all the required data.
-                $conn = null;
-            ?>
-
+                    
+                    // Remove connection to the database when we have all the required data.
+                    $conn = null;
+                ?>
+            </tbody>
         </table>
     </div>
     
