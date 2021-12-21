@@ -28,12 +28,12 @@
         <table id="interview-table" class="table table-striped table-sortable">
             <thead>
                 <tr>
-                    <th scope="col" style="cursor: pointer;">Interview ID</th>
-                    <th scope="col" style="cursor: pointer;">Candidate ID</th>
-                    <th scope="col" style="cursor: pointer;">Department ID</th>
-                    <th scope="col" style="cursor: pointer;">Position ID</th>
-                    <th scope="col" style="cursor: pointer;">Date</th>
-                    <th scope="col" style="cursor: pointer;">Result</th>
+                    <th scope="col" style="cursor: pointer;">Interview ID<i class="fas fa-sort"></i></th>
+                    <th scope="col" style="cursor: pointer;">Candidate ID<i class="fas fa-sort"></i></th>
+                    <th scope="col" style="cursor: pointer;">Department ID<i class="fas fa-sort"></i></th>
+                    <th scope="col" style="cursor: pointer;">Position ID<i class="fas fa-sort"></i></th>
+                    <th scope="col" style="cursor: pointer;">Date<i class="fas fa-sort"></i></th>
+                    <th scope="col" style="cursor: pointer;">Result<i class="fas fa-sort"></i></th>
                 </tr>
             </thead>
             

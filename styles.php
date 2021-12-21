@@ -17,17 +17,8 @@ th {
   cursor: pointer;
 }
 
-.table-sortable .th-sort-asc::after {
-  content: "\25b4";
-}
-
-.table-sortable .th-sort-desc::after {
-  content: "\25be";
-}
-
-.table-sortable .th-sort-asc::after,
-.table-sortable .th-sort-desc::after {
-  margin-left: 5px;
+.table-sortable i {
+    padding-left: 5px;
 }
 
 .table-sortable .th-sort-asc,
