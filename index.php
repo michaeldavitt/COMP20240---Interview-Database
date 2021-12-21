@@ -1,3 +1,26 @@
+<?php
+    // Initialise Result Array with all results included
+    $results = Array("Accepted", "Rejected", "Pending");
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Remove a result from the array if it has not been selected by the user
+        if (empty($_POST["Accepted"])) {
+            $results = array_diff($results, array("Accepted"));
+        } 
+
+        if (empty($_POST["Rejected"])) {
+            $results = array_diff($results, array("Rejected"));
+        } 
+
+        if (empty($_POST["Pending"])) {
+            $results = array_diff($results, array("Pending"));
+        } 
+    }
+
+    // Convert results array to a string for the SQL query
+    $results = implode("','", $results);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +44,27 @@
 
     <h1>Interviews</h1>
 
-
+    <form class="border" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" name="Accepted" value="Accepted" <?php if (isset($_POST["Accepted"])) echo "checked";?>></input>
+            <label for="Accepted" class="form-check-label">
+                Accepted
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" name="Rejected" value="Rejected" <?php if (isset($_POST["Rejected"])) echo "checked";?>></input>
+            <label for="Rejected" class="form-check-label">
+                Rejected
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" name="Pending" value="Pending" <?php if (isset($_POST["Pending"])) echo "checked";?>></input>
+            <label for="Pending" class="form-check-label">
+                Pending
+            </label>
+        </div>
+        <button type="submit" class="btn btn-secondary my-2" name="submit" value="Get Interviews">Get Interviews</button>
+    </form>
 
     <div class="table-responsive">
         <!-- Table - Reference: https://getbootstrap.com/docs/4.0/content/tables/ -->
@@ -51,7 +94,7 @@
                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                         try {
-                            $stmt = $conn->prepare("SELECT * FROM interview");
+                            $stmt = $conn->prepare("SELECT * FROM interview WHERE result in ('" . $results . "')");
                             $stmt->execute();
 
                             // set the resulting array to associative
