@@ -1,10 +1,10 @@
 # COMP20240: Interview Database
 
 ## Instructions
-This project assumes that you have a web server solution stack package like XAMPP installed. Once you have cloned this repository, launch the server and the database. Create a new database called company_interviews and import the company_interviews.sql file to gain access to the data used in this site. Run the project repository on the server and you should be greeted with the homepage, which displays interviews for the fictional company SalesCorp
+This project assumes that you have a web server solution stack package like XAMPP installed. Once you have cloned this repository, launch the server and the database. Create a new database called company_interviews and import the company_interviews.sql file to gain access to the data used in this site. Run the project repository on the server and you should be greeted with a login page. Click to sign up and follow the onscreen instructions from there.
 
 ## Material Reference
-The database featured on this site was designed as part of the UCD module COMP20240 - Relational Databases and Information Systems. The site was built using PHP using material from COMP30680 - Web Application Development, also offered by UCD. Additional references have been included in the PHP files.
+The database featured on this site was designed as part of the UCD module COMP20240 - Relational Databases and Information Systems. The site was built using PHP using material from COMP30680 - Web Application Development, also offered by UCD. Login functionality was created using the following tutorial: https://www.tutorialrepublic.com/php-tutorial/php-mysql-login-system.php Additional references have been included in the PHP files.
 
 ## Design Description
 When the user enters the site, they are greeted with a page that displays all interviews that the company have a record of. These interviews may have not yet taken place. The interview table gives the interview IDs, which uniquely identify the interviews in the table, along with candidate IDs, department IDs, position IDs, interview dates and results (either accepted or rejected, or blank in the case where either the interview has not taken place or the decision has not yet been made). The user can click on elements in the Candidate ID, Department ID, and Position ID columns to gain more detailed information.
