@@ -12,6 +12,9 @@
                         <li class=\"nav-item px-3\">
                             <a href=\"index.php\" class=\"nav-link\">Interviews</a>
                         </li>
+                        <li class=\"nav-item px-3\">
+                            <a href=\"user_account.php\" class=\"nav-link\">Account</a>
+                        </li>
                     </ul>
             </div>
             

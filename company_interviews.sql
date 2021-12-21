@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3310
--- Generation Time: Dec 19, 2021 at 09:47 PM
+-- Generation Time: Dec 21, 2021 at 08:05 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -154,7 +154,7 @@ CREATE TABLE `interview` (
   `iddepartment` int(11) NOT NULL COMMENT 'Department ID - Foreign key to the Departments table',
   `idposition` int(11) NOT NULL COMMENT 'Position ID - Foreign key referencing the Positions table',
   `date` date DEFAULT NULL COMMENT 'Date at which the interview took place',
-  `result` varchar(45) DEFAULT NULL COMMENT 'Outcome of the interview - Can be Accepted, Rejected or Null (indicating that a decision has not yet been made)'
+  `result` varchar(45) DEFAULT 'Pending' COMMENT 'Outcome of the interview - Can be Accepted, Rejected or Pending (indicating that a decision has not yet been made)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Each row represents an interview that has either taken place or will take place in the future';
 
 --
@@ -163,24 +163,25 @@ CREATE TABLE `interview` (
 
 INSERT INTO `interview` (`idInterview`, `idcandidate`, `iddepartment`, `idposition`, `date`, `result`) VALUES
 (1, 6, 6, 1, '2021-09-28', 'Accepted'),
-(2, 10, 6, 2, '2022-01-01', ''),
+(2, 10, 6, 2, '2022-01-01', 'Pending'),
 (3, 2, 6, 2, '2020-12-31', 'Rejected'),
 (4, 5, 6, 3, '2020-12-12', 'Accepted'),
 (5, 7, 4, 10, '2021-01-01', 'Rejected'),
-(6, 8, 10, 5, '2022-01-01', NULL),
+(6, 8, 10, 5, '2022-01-01', 'Pending'),
 (7, 2, 2, 6, '2020-01-01', 'Rejected'),
-(8, 3, 9, 8, '2022-01-02', NULL),
+(8, 3, 9, 8, '2022-01-02', 'Pending'),
 (9, 4, 1, 9, '2021-03-02', 'Accepted'),
 (10, 10, 6, 1, '2020-10-10', 'Rejected'),
 (11, 10, 10, 5, '2020-09-01', 'Rejected'),
 (12, 3, 4, 5, '2022-01-01', 'Rejected'),
 (13, 1, 1, 1, '2022-01-01', 'Rejected'),
 (14, 6, 7, 2, '2020-12-31', 'Rejected'),
-(15, 1, 6, 1, '2022-01-01', NULL),
+(15, 1, 6, 1, '2022-01-01', 'Pending'),
 (16, 3, 9, 7, '2021-12-07', 'Rejected'),
 (17, 3, 9, 7, '2021-12-07', 'Rejected'),
 (18, 4, 10, 1, '2021-12-10', 'Accepted'),
-(19, 9, 14, 10, '2021-12-01', 'Rejected');
+(19, 9, 14, 10, '2021-12-01', 'Rejected'),
+(20, 5, 5, 5, '2020-08-04', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -246,6 +247,26 @@ INSERT INTO `position_skills` (`idposition`, `skill`) VALUES
 (10, 'Leadership'),
 (10, 'Python');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `created_at`) VALUES
+(1, 'mdavitt', '$2y$10$4nP09oodVKJRfQz8RiJRSOsVk8uSbpyxRMTkgj6TIxPX6WesY3oSu', '2021-12-21 18:56:53');
+
 --
 -- Indexes for dumped tables
 --
@@ -298,6 +319,23 @@ ALTER TABLE `position`
 --
 ALTER TABLE `position_skills`
   ADD PRIMARY KEY (`idposition`,`skill`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `Unique` (`username`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
